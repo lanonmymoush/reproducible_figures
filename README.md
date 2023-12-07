@@ -2,8 +2,7 @@
 **Question 3 of Reproducible Figures Assignment**
 
 *Hi reader, 
-This repository contains both the R Markdown (.rmd) file and PDF versions of my pipeline (.pdf). 
-Enjoy.*
+This repository contains both the R Markdown (.rmd) file and PDF versions of my pipeline (.pdf), as well as feedback for my partner in the README.md file*
 
 **Question 3C - Partner Feedback**  
 **What elements of your partner's code helped you to understand their data pipeline?**  
