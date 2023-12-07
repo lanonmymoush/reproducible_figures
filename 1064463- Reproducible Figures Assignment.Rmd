@@ -1,5 +1,5 @@
 ---
-title: "Homework Template"
+title: "Homework Template- 1064463"
 output:
   pdf_document: default
   html_document: default
@@ -10,10 +10,6 @@ date: "2023-10-09"
 knitr::opts_chunk$set(echo = FALSE)
 options(repos = c(CRAN = "https://cran.r-project.org"))
 ```
-
-*Please Knit your .rmd to a PDF format or HTML and submit that with no identifiers like your name.*
-
-*To create a PDF, first install tinytex and load the package. Then press the Knit arrow and select "Knit to PDF".*
 
 ## QUESTION 01: Data Visualisation for Science Communication
 
@@ -132,12 +128,12 @@ To begin looking at the analysis of the differences in body mass, I began by cre
 ggplot(Adelie, aes(x = body_mass_g))+
 geom_histogram()+
 facet_wrap(~Sex)
-penguinsmod1 <- lm(body_mass_g ~ Sex, Adelie)
 ```
 
 This histogram shows that the data is relatively normally distributed, and so a one-way ANOVA (Analysis of Variance) can be used to determine if there is a significant difference in the mean body mass of male and female adelie penguins. To do this, you would first have to create and summarise a linear model. 
 
 ```{r}
+penguinsmod1 <- lm(body_mass_g ~ Sex, Adelie)
 summary(penguinsmod1)
 ```
 
@@ -178,27 +174,59 @@ This analysis suggests that there is a difference in body mass between male and 
 *Upload your RProject you created for **Question 2** and any files and subfolders used to GitHub. Do not include any identifiers such as your name. Make sure your GitHub repo is public.*
 
 *GitHub link:*
+https://github.com/lanonmymoush/reproducible_figures
 
 *You will be marked on your repo organisation and readability.*
 
 ### b) Share your repo with a partner, download, and try to run their data pipeline.
 
 *Partner's GitHub link:*
+https://github.com/fraxinus-excelsiorr/reproducible_research/tree/main 
 
 *You **must** provide this so I can verify there is no plagiarism between you and your partner.*
 
 ### c) Reflect on your experience running their code. (300-500 words)
 
--   *What elements of your partner's code helped you to understand their data pipeline?*
+*What elements of your partner's code helped you to understand their data pipeline?*
 
--   *Did it run? Did you need to fix anything?*
+My partners analysis provided great insight into the background behind the investigated variables, bill length and bill depth. This insight was then further enhanced through the use of code. The comments and notes written besides hashtags in the R code helped me to understand the steps taken to ensure that the code ran and generated the necessary figures. The use of multiple generated functions also made it easier to understand the purpose of the code when a comment was not provided to explain the justification of calling the function. The names of these functions also ensured that the code was both human and computer readable. 
 
--   *What suggestions would you make for improving their code to make it more understandable or reproducible, and why?*
 
--   *If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why?*
+*Did it run? Did you need to fix anything?*
+
+To get the pipeline to run, I needed to download the corresponding files from their GitHub repository. This was successful however, when attempting to run the code, I ran into some issues in line 51, which attempted to source and call the cleaning and plotting functions. This needed to be altered as a result of the location of the file and working directory. Additionally, the source code attempted to open a file saved as .r as opposed to .R, as suggested in the code, meaning that this also had to be changed. Once these changes were made, it was very easy to run the code. 
+
+
+*What suggestions would you make for improving their code to make it more understandable or reproducible, and why?*
+
+I don't believe there are any major suggestions that can be made to improve my partners code, however to make loading the functions more easy, I believe it would be beneficial to save both the plotting and cleaning functions in the same file, perhaps a functions file as opposed to a folder. This would allow the functions to be called more easily as as they are located in the same place regardless of the location which they are saved on different devices. 
+Additionally, to improve general reproducibility of the code/analysis, I believe that my partner could have used a Tukey HD test to determine which species are significant different from each other, rather than completing three separate linear regressions. This would be more efficient and would also show how significant the difference is between each group, allowing for inferences to be made about the evolutionary and ecological similarities between species, e.g. overlapping food sources influencing bill depth and length. 
+
+
+*If you needed to alter your partner's figure using their code, do you think that would be easy or difficult, and why?*
+
+I believe that altering my partner's figure would be relatively easy. If I wanted to change the scale of the images of the figures depending on the format needed, i.e. if the figure was needed for a poster, presentation, handout, this could be done by altering the scale or resolution of the image, seen in the R chunks which save the figures as a .png and .svg. If saved as an .svg, the image has an "infinite resolution" and can be zoomed in/expanded without becoming pixelated, making the image easier to visualise. 
+If I wanted to change the features of the figure, I would have to alter their plotting.R file in which different functions were defined to create the figures. In this code, I could alter the points on the figure, the themes, the axes labels, and also the raw data and change the output of the function accordingly. 
 
 ### d) Reflect on your own code based on your experience with your partner's code and their review of yours. (300-500 words)
+Link to partner's feedback of my work- https://github.com/fraxinus-excelsiorr/reproducible_research/blob/main/PenguinProject/partner_feedback.Rmd
 
--   *What improvements did they suggest, and do you agree?*
+*What improvements did they suggest, and do you agree?*
 
--   *What did you learn about writing code for other people?*
+My partner suggested many improvements for my code which I agree with. The first suggestion which was made was adding a deeper explanation for the use of a linear model and ANOVA, and also explaining the results of the ANOVA so that individuals who do not have a scientific background can still understand the code. In an attempt to rectify this, I will re-run my linear model and ANOVA: 
+```{r}
+penguinsmod1 <- lm(body_mass_g ~ Sex, Adelie)
+summary(penguinsmod1)
+anova(penguinsmod1)
+```
+Conducting a linear regression and one-way ANOVA shows that there is a significant difference between the mean body mass of Adelie males and female penguins, meaning that the null hypothesis can be rejected and the experimental/alternative hypothesis can be accepted. The linear model shows that when the data is linearised, the line generated has an intercept of 3368.84 and a gradient of 674.66 and allows body mass to be predicted based on the sex of an individual. With ANOVA calculating a p-value smaller than 2.2e-16, it can be sensibly suggested that the results observed are not likely to be due to chance and are likely to be result of the categorical variable, and also suggests that the body mass of an individual Adelie penguin can be . Additionally, the linear regression of the model shows an R^2 value of 0.54, suggesting that approximately 54% of the variation in response variable, body mass can be explained by the explanatory variable, sex. 
+
+Another suggestion that was made by my partner was the generation and calling of functions used to plot and clean my data. The pipeline that I have used to clean my data and plot my data, despite working, are not very reproducible when working with other datasets. By using a called function with piping, similar analysis could be applied to other datasets and could be used by other individuals more easily, making coding more accessible, and reproducible. 
+
+I would also like to comment on the limitations of my analysis, in light of the limitations of my partner's analysis. The main limitation affecting my analysis would be the use of only one species found in the Palmer's Penguins dataset. As I chose to focus on only one species from the dataset, Adelie penguins, the findings cannot be applied to other species within the dataset, and so are not generalisable to other species. To improve this, the analysis could be reproduced on both Chinstrap and Gentoo penguins to determine if similar results are found, i.e. if there is a significant difference in body mass between male and feale penguins, and draw conclusions which are more overarching and representative of a wider number of species.
+
+
+*What did you learn about writing code for other people?*
+
+While completing this assignment, I learned that when making code for other people to use, notes and comments should be made clear to ensure that someone not linked to you, but has access to your work can easily work through your code and analysis and achieve the same results. I have also learned the importance of ensuring that figures are easily readable. 
+A major improvement I would add to my work if I were to complete the assignment again would be to use functions which would make the code more reproducible overall and would attempt to use piping which would improve the efficiency of the code. 
